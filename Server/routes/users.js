@@ -1,23 +1,34 @@
+const e = require("express")
 const express = require("express")
 const router = express.Router()
 
 router.use(logger)
-router.get('/',(req,res)=>{
-    res.send("users")
 
+router.get("/",(req,res)=>{
+    console.log(req.query.name )
+    res.send("userlist")
 })
-router.post('/',(req,res)=>{
-    res.send("create user")
-    
-})
-
 
 router.get('/new',(req,res)=>{
-    res.json({message : "error"})
+    res.render("users/new",{firstname :" "})
+})
+router.post('/',(req,res)=>{
+    const isvalid = false   
+    if(isvalid){
+        users.push({firstname : req.body.firstname})
+        res.redirect(`users/${users.length -1 }`)
+    }
+    else{
+        console.log("Error")
+        res.render("users/new")
+    }
+    console.log(req.body.firstname)
+    res.send("hi")
 })
 
 
 router.route("/:id").get((req , res)=>{
+    console.log(req.user)
     console.log(req.user)
     req.params.id
     res.send(`get user with id ${req.params.id}`)

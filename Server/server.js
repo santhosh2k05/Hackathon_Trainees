@@ -1,9 +1,14 @@
 const express =  require('express')
 const app = express()
-app.set("view engine ","ejs")
+app.set("view engine", "ejs")
 app.get('/',(req ,res,next)=>{
  
-    res.render("index")
+    res.render("index", {text1: "world",text:"poda Panni"})
+   
  
 })
-app.listen(3000)
+const userRouter = require("./routes/users")
+const postrouter = require("./routes/posts")
+app.use('/users',userRouter)
+app.use('/posts',postrouter)
+app.listen(5000)
